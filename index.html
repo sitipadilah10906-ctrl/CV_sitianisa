@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Portofolio & CV - Siti Anisa Nur Padilah</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        /* Sidebar Dashboard */
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0d6efd 0%, #084298 100%);
+            color: white;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: all 0.2s;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+        }
+        .stat-card {
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+        .section-heading {
+            border-left: 4px solid #0d6efd;
+            padding-left: 10px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. FITUR BOOTSTRAP: NAVIGATION BAR (Top Navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-speedometer2 me-2"></i>Dashboard CV & Portofolio
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#ringkasan">Ringkasan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tabel-data">Biodata & Pendidikan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#collapsible-info">Keahlian & Pengalaman</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galeri-proyek">Proyek</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-light btn-sm text-primary fw-semibold rounded-pill px-3" onclick="window.print()">
+                            <i class="bi bi-printer me-1"></i> Cetak CV
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            
+            <!-- Sidebar Kiri (Dashboard Navigation) -->
+            <div class="col-lg-3 col-xl-2 sidebar p-4 d-none d-lg-block">
+                <div class="text-center mb-4">
+                    <!-- GANTI 'foto-profil.jpg' DENGAN NAMA FILE FOTO ANDA -->
+                    <img src="foto.jpeg" onerror="this.src='https://via.placeholder.com/150/004085/ffffff?text=Foto+Profil'" alt="Siti Anisa Nur Padilah" class="rounded-circle profile-img mb-3 shadow">
+                    <h6 class="fw-bold mb-0">Siti Anisa Nur Padilah</h6>
+                    <small class="text-white-50">Mahasiswa TRPL</small>
+                </div>
+                <hr class="border-light opacity-25">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#ringkasan"><i class="bi bi-grid-1x2-fill me-2"></i>Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tabel-data"><i class="bi bi-table me-2"></i>Data & Pendidikan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#collapsible-info"><i class="bi bi-list-check me-2"></i>Keahlian (Collapsible)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeri-proyek"><i class="bi bi-images me-2"></i>Galeri Proyek</a>
+                    </li>
+                </ul>
+                
+                <!-- Kontrol Animasi jQuery di Sidebar -->
+                <div class="mt-5 p-3 rounded bg-white bg-opacity-10">
+                    <small class="d-block fw-bold mb-2"><i class="bi bi-magic me-1"></i>Kontrol Animasi jQuery</small>
+                    <button id="btnToggleStats" class="btn btn-sm btn-light w-100 mb-2 text-primary fw-semibold">
+                        Fade Kartu Statistik
+                    </button>
+                    <button id="btnToggleAbout" class="btn btn-sm btn-outline-light w-100">
+                        Hide/Show Tentang Saya
+                    </button>
+                </div>
+            </div>
+
+            <!-- Area Konten Utama Dashboard -->
+            <main class="col-lg-9 col-xl-10 p-4 p-md-5">
+                
+                <!-- Header Mobile (Muncul hanya di layar kecil/HP) -->
+                <div class="card border-0 shadow-sm mb-4 d-lg-none bg-primary text-white">
+                    <div class="card-body text-center">
+                        <img src="foto-profil.jpg" onerror="this.src='https://via.placeholder.com/150/004085/ffffff?text=Foto+Profil'" alt="Foto Profil" class="rounded-circle profile-img mb-2">
+                        <h4 class="fw-bold mb-0">Siti Anisa Nur Padilah</h4>
+                        <p class="mb-0 small">Mahasiswa Teknologi Rekayasa Perangkat Lunak</p>
+                    </div>
+                </div>
+
+                <!-- Ringkasan Dashboard (Stat Cards + Efek jQuery) -->
+                <div id="ringkasan" class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="section-heading mb-0">Ringkasan Profil</h4>
+                        <!-- Tombol jQuery untuk layar HP & Desktop -->
+                        <button id="btnFadeMain" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye-slash me-1"></i> Efek Fade Kartu (jQuery)
+                        </button>
+                    </div>
+
+                    <div class="row g-3" id="statsContainer">
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="card stat-card shadow-sm h-100 border-start border-4 border-primary">
+                                <div class="card-body">
+                                    <small class="text-muted">Institusi</small>
+                                    <h6 class="fw-bold mt-1 mb-0">Politeknik Manahijul Huda</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="card stat-card shadow-sm h-100 border-start border-4 border-success">
+                                <div class="card-body">
+                                    <small class="text-muted">Program Studi</small>
+                                    <h6 class="fw-bold mt-1 mb-0">Teknologi Rekayasa Perangkat Lunak</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="card stat-card shadow-sm h-100 border-start border-4 border-warning">
+                                <div class="card-body">
+                                    <small class="text-muted">Keterampilan Utama</small>
+                                    <h6 class="fw-bold mt-1 mb-0">HTML, CSS, JS, PHP, Figma</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="card stat-card shadow-sm h-100 border-start border-4 border-info">
+                                <div class="card-body">
+                                    <small class="text-muted">Status Akademik</small>
+                                    <h6 class="fw-bold mt-1 mb-0 text-success">Mahasiswa Aktif</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tentang Saya (Bisa di-Hide/Show dengan jQuery) -->
+                <div class="card border-0 shadow-sm mb-4" id="aboutBox">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="fw-bold text-primary mb-0"><i class="bi bi-person-lines-fill me-2"></i>Tentang Saya</h5>
+                            <button id="btnHideAbout" class="btn btn-sm btn-light text-muted">Sembunyikan</button>
+                        </div>
+                        <p class="text-secondary mb-0 lh-lg">
+                            Saya adalah mahasiswa yang tertarik pada bidang teknologi dan pemrograman[cite: 2]. Saya ingin terus belajar, mengembangkan keterampilan, dan menambah pengalaman di bidang teknologi informasi[cite: 2].
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2. FITUR BOOTSTRAP: TABLE (Biodata & Riwayat Pendidikan) -->
+                <div id="tabel-data" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="section-heading mb-0">Biodata & Riwayat Pendidikan (Bootstrap Table)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered align-middle mb-0">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th style="width: 30%;">Kategori</th>
+                                        <th>Keterangan</th>
+                                        <th style="width: 20%;">Status / Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-semibold">Nama Lengkap</td>
+                                        <td>Siti Anisa Nur Padilah</td>
+                                        <td><span class="badge bg-primary">Identitas</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Email</td>
+                                        <td><a href="mailto:sitipadilah1096@gmail.com" class="text-decoration-none">sitipadilah1096@gmail.com</a></td>
+                                        <td><span class="badge bg-success">Aktif</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Institusi</td>
+                                        <td>Politeknik Manahijul Huda</td>
+                                        <td><span class="badge bg-info text-dark">Perguruan Tinggi</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-semibold">Program Studi</td>
+                                        <td>Teknologi Rekayasa Perangkat Lunak (TRPL)</td>
+                                        <td><span class="badge bg-secondary">Mahasiswa</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. FITUR BOOTSTRAP: COLLAPSIBLE (Accordion Keterampilan & Pengalaman) -->
+                <div id="collapsible-info" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="section-heading mb-0">Keterampilan & Pengalaman (Bootstrap Collapsible)</h5>
+                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#extraNoteCollapse">
+                            Buka/Tutup Catatan
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <!-- Collapsible tunggal -->
+                        <div class="collapse mb-3" id="extraNoteCollapse">
+                            <div class="alert alert-info mb-0">
+                                <i class="bi bi-info-circle-fill me-2"></i>Seluruh keterampilan di bawah ini dipelajari melalui praktikum kampus dan pengerjaan proyek mandiri.
+                            </div>
+                        </div>
+
+                        <!-- Accordion Collapsible -->
+                        <div class="accordion" id="accordionCV">
+                            <!-- Item 1: Keterampilan -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSkill">
+                                        <i class="bi bi-code-slash me-2 text-primary"></i> Keterampilan Teknis (HTML, CSS, JS, PHP, Figma)
+                                    </button>
+                                </h2>
+                                <div id="collapseSkill" class="accordion-collapse collapse show" data-bs-parent="#accordionCV">
+                                    <div class="accordion-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <small class="fw-bold">HTML5 & CSS3 (Bootstrap)</small>
+                                                <div class="progress mb-2" style="height: 12px;">
+                                                    <div class="progress-bar bg-primary" style="width: 85%;">85%</div>
+                                                </div>
+                                                <small class="fw-bold">JavaScript & jQuery</small>
+                                                <div class="progress" style="height: 12px;">
+                                                    <div class="progress-bar bg-warning text-dark" style="width: 75%;">75%</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small class="fw-bold">PHP & Database MySQL</small>
+                                                <div class="progress mb-2" style="height: 12px;">
+                                                    <div class="progress-bar bg-success" style="width: 75%;">75%</div>
+                                                </div>
+                                                <small class="fw-bold">UI/UX Design (Figma)</small>
+                                                <div class="progress" style="height: 12px;">
+                                                    <div class="progress-bar bg-info text-dark" style="width: 80%;">80%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 2: Pengalaman -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExp">
+                                        <i class="bi bi-briefcase-fill me-2 text-primary"></i> Pengalaman & Praktikum
+                                    </button>
+                                </h2>
+                                <div id="collapseExp" class="accordion-collapse collapse" data-bs-parent="#accordionCV">
+                                    <div class="accordion-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Membuat website sederhana menggunakan HTML dan CSS[cite: 2].</li>
+                                            <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Mengikuti pembelajaran dan praktikum pemrograman[cite: 2].</li>
+                                            <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Mempelajari dasar database MySQL dan pengelolaan data[cite: 2].</li>
+                                            <li class="list-group-item"><i class="bi bi-check2-circle text-success me-2"></i>Mengerjakan proyek kelompok sistem informasi[cite: 2].</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. FITUR BOOTSTRAP: CAROUSEL (Galeri Proyek) -->
+                <div id="galeri-proyek" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="section-heading mb-0">Galeri Proyek (Bootstrap Carousel)</h5>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalProyek">
+                            Detail Tugas
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="carouselProyek" class="carousel slide rounded overflow-hidden shadow-sm" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselProyek" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#carouselProyek" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#carouselProyek" data-bs-slide-to="2"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                  <img src="foto proyek.jpeg" class="d-block w-100" alt="Proyek 1 - Website CV">
+                                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                                        <h5>Proyek 1: Dashboard Portofolio CV</h5>
+                                        <p>Membuat website sederhana dan responsif dengan HTML, CSS, JS, Bootstrap, dan jQuery[cite: 2].</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="="foto proyek.jpeg" class="d-block w-100" alt="Proyek 1 - Website CV">
+                                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                                        <h5>Proyek 2: Proyek Kelompok Sistem Informasi</h5>
+                                        <p>Implementasi manajemen database menggunakan MySQL dan PHP[cite: 2].</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://via.placeholder.com/900x320/495057/ffffff?text=Proyek+3:+Desain+UI/UX+Figma" class="d-block w-100" alt="Proyek 3">
+                                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                                        <h5>Proyek 3: Perancangan Desain Aplikasi</h5>
+                                        <p>Membuat wireframe dan prototipe antarmuka pengguna dengan Figma.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProyek" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselProyek" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Penutup -->
+                <div class="alert alert-primary border-0 shadow-sm">
+                    <h6 class="fw-bold"><i class="bi bi-chat-square-quote-fill me-2"></i>Penutup</h6>
+                    <p class="mb-0 small">
+                        Saya berharap mendapat kesempatan untuk bergabung, belajar, dan memberikan kontribusi dengan kemampuan yang saya miliki. Terima kasih atas waktu dan perhatiannya[cite: 2].
+                    </p>
+                </div>
+
+                <!-- Footer -->
+                <footer class="text-center text-muted small pt-3 border-top">
+                    &copy; 2026 Siti Anisa Nur Padilah - Politeknik Manahijul Huda[cite: 1, 3]
+                </footer>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Tambahan Estetika -->
+    <div class="modal fade" id="modalProyek" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Informasi Dashboard Portofolio</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Dashboard ini telah memenuhi seluruh spesifikasi:</p>
+                    <ul>
+                        <li><strong>Bootstrap 5:</strong> Navigation Bar, Table, Collapsible (Accordion), Carousel, Cards, dan Modal.</li>
+                        <li><strong>jQuery Animation:</strong> Efek <code>fadeIn()</code>, <code>fadeToggle()</code>, dan <code>hide()/show()</code> interaktif.</li>
+                        <li><strong>GitHub Pages Ready:</strong> Menggunakan CDN sehingga siap langsung diunggah ke <code>github.io</code>.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN (Wajib untuk nomor 3) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script Animasi jQuery -->
+    <script>
+        $(document).ready(function() {
+            // 1. Efek Fade In saat halaman pertama kali dibuka
+            $("#statsContainer").hide().fadeIn(1000);
+
+            // 2. Efek Fade Toggle pada kartu statistik
+            $("#btnToggleStats, #btnFadeMain").click(function() {
+                $("#statsContainer").fadeToggle(600);
+            });
+
+            // 3. Efek Hide / Show pada bagian Tentang Saya
+            $("#btnToggleAbout").click(function() {
+                $("#aboutBox").toggle(500);
+            });
+
+            $("#btnHideAbout").click(function() {
+                $("#aboutBox").hide(400);
+            });
+        });
+    </script>
+</body>
+</html>
